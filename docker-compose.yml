@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16
+    container_name: taskboard-db
+    environment:
+      POSTGRES_USER: taskuser
+      POSTGRES_PASSWORD: taskpass
+      POSTGRES_DB: taskboard
+    ports:
+      - "5433:5432"
+    volumes:
+      - taskboard-data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: taskboard-backend
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://taskuser:taskpass@db:5432/taskboard
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    container_name: taskboard-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  taskboard-data:
