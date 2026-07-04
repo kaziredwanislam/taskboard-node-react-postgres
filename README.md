@@ -1,6 +1,9 @@
 # TaskBoard
 
-A small full-stack project management application built with Node.js, TypeScript, React, PostgreSQL, and Docker.
+A small full-stack project management application built with Node.js, TypeScript, React, PostgreSQL, and Docker. 
+
+TaskBoard is a small full-stack project management application.
+Users can create projects, add tasks under each project, update task status like todo, doing, or done, and delete tasks. The data is stored permanently in PostgreSQL. The whole project runs using Docker Compose with three services: frontend, backend, and database.
 
 ## Tech Stack
 
